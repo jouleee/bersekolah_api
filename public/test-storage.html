@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Storage Access</title>
+</head>
+<body>
+    <h1>Test Laravel Storage Access</h1>
+    
+    <h2>Test Tsalitsa Photo:</h2>
+    <p>URL: <code>http://localhost:8000/storage/admin/mentor/KF1LnSvxh8Nm1wmoRlnzLAagFxhlj43U62eL7Aiq.jpg</code></p>
+    <img src="http://localhost:8000/storage/admin/mentor/KF1LnSvxh8Nm1wmoRlnzLAagFxhlj43U62eL7Aiq.jpg" 
+         alt="Tsalitsa Photo" 
+         style="max-width: 300px; border: 2px solid red;"
+         onload="console.log('Image loaded successfully!')"
+         onerror="console.error('Image failed to load!')">
+    
+    <h2>Test Default Photo:</h2>
+    <img src="/assets/image/defaults/testimoni-default.jpg" 
+         alt="Default Photo" 
+         style="max-width: 300px; border: 2px solid green;"
+         onload="console.log('Default image loaded!')"
+         onerror="console.error('Default image failed!')">
+         
+    <h2>JavaScript Test:</h2>
+    <div id="result"></div>
+    
+    <script>
+        // Test foto Tsalitsa
+        fetch('http://localhost:8000/storage/admin/mentor/KF1LnSvxh8Nm1wmoRlnzLAagFxhlj43U62eL7Aiq.jpg')
+            .then(response => {
+                document.getElementById('result').innerHTML += 
+                    `<p>Fetch test: Status ${response.status} - ${response.ok ? 'SUCCESS' : 'FAILED'}</p>`;
+                console.log('Fetch response:', response);
+            })
+            .catch(error => {
+                document.getElementById('result').innerHTML += 
+                    `<p>Fetch test: ERROR - ${error.message}</p>`;
+                console.error('Fetch error:', error);
+            });
+    </script>
+</body>
+</html>
